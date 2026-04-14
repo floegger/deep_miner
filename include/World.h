@@ -3,6 +3,9 @@
 #include <vector>
 
 class World {
+    /* A 3D grid world where robots can mine blocks.
+    Blocks have a value, some have special effects. */
+
   public:
     explicit World ( int x = 5, int y = 5, int z = 10 );
 
