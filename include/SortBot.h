@@ -7,3 +7,4 @@ class SortBot : public BaseRobot {
     SortBot ( int startX, int startY );
     int mine ( World &world ) override;
 };
+
