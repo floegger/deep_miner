@@ -9,4 +9,6 @@ class RandomBot : public BaseRobot {
     public:
         RandomBot ( const int startX, const int startY );
         int mine ( World& world ) override;
+    private:
+        int randomNumber();
 };

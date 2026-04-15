@@ -3,8 +3,8 @@
 #include <iostream>
 #include <random>
 
-// #include <algorithm>
-// #include <atomic>
+#include <algorithm>
+#include <atomic>
 
 World::World ( int x, int y, int z )
     : _sizeX ( x ), _sizeY ( y ), _sizeZ ( z ),
@@ -79,5 +79,39 @@ void World::display () const {
 }
 
 // TODO:
-// void World::rearrange ()
 // int World::checkEffects ( int x, int y ) const
+void World::rearrange() {
+    std::mt19937 rng(std::random_device{}());
+    std::uniform_int_distribution<int> opDist(0, 2);
+
+    for (int x = 0; x < _sizeX; ++x) {
+        for (int y = 0; y < _sizeY; ++y) {
+            std::vector<int> values;
+            std::vector<int> positions;
+            for (int z = 0; z < _sizeZ; ++z) {
+                if (_grid[x][y][z] != 0) {
+                    values.push_back(_grid[x][y][z]);
+                    positions.push_back(z);
+                }
+            }
+
+            switch (opDist(rng)) {
+                case 0: std::shuffle(values.begin(), values.end(), rng); break;
+                case 1: std::sort(values.begin(), values.end());         break;
+                case 2: std::sort(values.begin(), values.end(), std::greater<int>()); break;
+            }
+
+            for (std::size_t i = 0; i < positions.size(); ++i)
+                _grid[x][y][positions[i]] = values[i];
+        }
+    }
+}
+
+int World::checkEffects ( int x, int y ) {
+    auto& col = _grid[x][y];
+    auto it = std::find_if(col.begin(), col.end(), [](int v){ return v < 0; });
+    if (it == col.end()) return 0;
+    int effect = *it;
+    *it = 0;  // consume: the effect fires exactly once
+    return effect;
+}

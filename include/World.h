@@ -24,7 +24,7 @@ class World {
     void rearrange ();
 
     // stage 3
-    int checkEffects ( int x, int y ) const;
+    int checkEffects ( int x, int y );
 
   private:
     int _sizeX, _sizeY, _sizeZ;
