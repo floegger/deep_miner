@@ -12,4 +12,11 @@ add_executable(deep_miner
         include/World.h
         src/BaseRobot.cpp
         src/SortBot.cpp
-        src/World.cpp)
+        src/World.cpp
+        include/Game.h
+        include/DigDeepBot.h
+        include/RandomBot.h
+        src/DigDeepBot.cpp
+        src/Game.cpp
+        src/RandomBot.cpp
+        main.cpp)

@@ -14,8 +14,8 @@ int SortBot::mine ( World &world ) {
         if ( v > 0 ) values.emplace_back(v, z );
     }
     if ( values.empty()) return 0;
-    // sort descending
-    std::sort ( values.begin(), values.end(), [] ( const auto& a, const auto& b ) { return a.first > b.first;} );
+    // sort ascending so highest value ends up at top (surface) and gets mined
+    std::sort ( values.begin(), values.end(), [] ( const auto& a, const auto& b ) { return a.first < b.first;} );
 
 for ( auto& [x,  z] : values ) {
     world.setValue ( x_, y_, z, 0);

@@ -21,7 +21,7 @@ class Game {
         void setup ();
         void play ( Robot& robot, bool isPlayer );
         void checkRearrange ( Robot& robot );
-        void applyEffects ( Robot& robot, int effect );
+        void applyEffect ( Robot& robot, int effect );
         bool isGameOver() const;
         void printScores() const;
         void printResult() const;
