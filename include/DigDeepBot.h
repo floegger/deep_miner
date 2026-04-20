@@ -1,11 +1,12 @@
 #pragma once
-#include "../include/BaseRobot.h"
 
-#include <type_traits>
+#include "BaseRobot.h"
+
 class World;
 
+/* Robot that mines up to three positive blocks per turn from its current column. */
 class DigDeepBot : public BaseRobot {
-    public:
-        DigDeepBot ( const int startX, const int startY );
-        int mine ( World& world ) override;
+  public:
+    DigDeepBot ( int startX, int startY );
+    int mine ( World &world ) override;
 };

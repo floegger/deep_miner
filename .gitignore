@@ -1,4 +1,5 @@
 uml_diagram.tex
 .zed/
 .idea/
-cmake-build-debug/
+.ignore/
+cmake-build-debug

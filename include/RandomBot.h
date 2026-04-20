@@ -4,11 +4,12 @@
 
 class World;
 
+/* Robot that mines a random number of positive blocks from its current column. */
 class RandomBot : public BaseRobot {
-/* A robot that digs at a random depth */
-    public:
-        RandomBot ( const int startX, const int startY );
-        int mine ( World& world ) override;
-    private:
-        int randomNumber();
+  public:
+    RandomBot ( int startX, int startY );
+    int mine ( World &world ) override;
+
+  private:
+    int randomNumber ();
 };

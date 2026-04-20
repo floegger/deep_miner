@@ -7,8 +7,9 @@
 BaseRobot::BaseRobot ( std::string name, int startX, int startY )
     : x_ ( startX ), y_ ( startY ), score_ ( 0 ), name_ ( std::move ( name ) ) {}
 
+/* Move one step in the requested direction while clamping to world bounds.
+   Complexity: O(1) */
 void BaseRobot::move ( int direction, const World &world ) {
-
     switch ( direction ) {
     case 1:
         x_ = std::min ( x_ + 1, world.getSizeX() - 1 );
@@ -27,6 +28,10 @@ void BaseRobot::move ( int direction, const World &world ) {
     }
 }
 
+/* Choose the next move by maximizing immediate surface value among
+   current/adjacent cells; if none are mineable nearby, step toward the
+   nearest non-empty column in the grid.
+   Complexity: O(1) for local evaluation, worst O(sizeX * sizeY) fallback scan */
 int BaseRobot::decideNextMove ( const World &world ) const {
     struct Option {
         int dir, val;
@@ -53,21 +58,28 @@ int BaseRobot::decideNextMove ( const World &world ) const {
     evaluate ( 0, -1, 4 );
 
     if ( options.empty() ) {
-        // All immediate neighbours are empty – scan the whole grid for the
-        // nearest non-empty column and step one cell toward it.
         int bestDist = INT_MAX, tx = x_, ty = y_;
         for ( int cx = 0; cx < world.getSizeX(); ++cx ) {
             for ( int cy = 0; cy < world.getSizeY(); ++cy ) {
                 if ( world.getSurfaceLevel ( cx, cy ) >= 0 ) {
                     int dist = std::abs ( cx - x_ ) + std::abs ( cy - y_ );
-                    if ( dist < bestDist ) { bestDist = dist; tx = cx; ty = cy; }
+                    if ( dist < bestDist ) {
+                        bestDist = dist;
+                        tx = cx;
+                        ty = cy;
+                    }
                 }
             }
         }
-        if ( tx == x_ && ty == y_ ) return 0;  // grid is truly empty
-        if ( tx > x_ ) return 1;
-        if ( tx < x_ ) return 2;
-        if ( ty > y_ ) return 3;
+
+        if ( tx == x_ && ty == y_ )
+            return 0;  // grid is truly empty
+        if ( tx > x_ )
+            return 1;
+        if ( tx < x_ )
+            return 2;
+        if ( ty > y_ )
+            return 3;
         return 4;
     }
 

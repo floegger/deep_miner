@@ -6,8 +6,8 @@
 
 class World;
 
+/* Virtual interface implemented by all robot types. */
 class Robot {
-    /* A virtual interface for a robot */
   public:
     virtual ~Robot () = default;
     Robot ( const Robot & ) = default;
