@@ -4,7 +4,6 @@
 #include <random>
 
 #include <algorithm>
-#include <atomic>
 
 World::World ( int x, int y, int z )
     : _sizeX ( x ), _sizeY ( y ), _sizeZ ( z ),
@@ -94,7 +93,7 @@ void World::display ( int p1x, int p1y, int p2x, int p2y ) const {
                 std::cout << std::setw ( 4 ) << val;
         }
         std::cout << "\n";
-        std::cout << "=================================\n";
+        std::cout << "=========================\n";
     }
 }
 

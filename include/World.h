@@ -14,7 +14,7 @@ class World {
     int getSurfaceLevel ( int x, int y ) const;
     int mine ( int x, int y );
 
-    void display ( int p1x = -1, int p1y = -1, int p2x = -1, int p2y = -1 ) const;
+    void display ( int p1x = -1, int p1y = -1, int p2x = -1, int p2y = -1 ) const; // player positions initialized to -1 -> outside of surface grid
 
     int getSizeX () const { return _sizeX; }
     int getSizeY () const { return _sizeY; }
