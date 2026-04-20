@@ -131,7 +131,7 @@ void World::rearrange () {
             std::vector<int> positions;
 
             for ( int z = 0; z < _sizeZ; ++z ) {
-                if ( _grid[ x ][ y ][ z ] != 0 ) {
+                if ( _grid[ x ][ y ][ z ] > 0 ) {  // only minable blocks; effect cells stay in place
                     values.push_back ( _grid[ x ][ y ][ z ] );
                     positions.push_back ( z );
                 }
